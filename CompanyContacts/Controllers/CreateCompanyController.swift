@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol CreateCompanyControllerDelegate: class {
+    func didCreateCompany(_ company: Company)
+}
+
 class CreateCompanyController: UIViewController {
     
     // MARK: - Properties
+    
+    weak var delegate: CreateCompanyControllerDelegate?
     
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -84,6 +90,9 @@ class CreateCompanyController: UIViewController {
     
     @objc fileprivate func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let companyName = nameTextField.text, !companyName.isEmpty else { return }
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            let newCompany = Company(name: companyName, foundDate: Date())
+            self.delegate?.didCreateCompany(newCompany)
+        }
     }
 }

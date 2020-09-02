@@ -12,7 +12,7 @@ class CompaniesController: UITableViewController {
     
     // MARK: - Properties
     
-    let companies = [
+    var companies = [
         Company(name: "Apple", foundDate: Date()),
         Company(name: "Google", foundDate: Date()),
         Company(name: "Facebook", foundDate: Date())
@@ -49,8 +49,11 @@ class CompaniesController: UITableViewController {
     
     @objc fileprivate func addButtonTapped(_ sender: UIBarButtonItem) {
         let createCompanyController = CreateCompanyController()
+        createCompanyController.delegate = self
+        
         let navController = UINavigationController(rootViewController: createCompanyController)
         navController.modalPresentationStyle = .fullScreen
+        
         present(navController, animated: true, completion: nil)
     }
 }
@@ -89,5 +92,17 @@ extension CompaniesController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
+    }
+}
+
+// MARK: - CreateCompanyControllerDelegate
+
+extension CompaniesController: CreateCompanyControllerDelegate {
+    
+    func didCreateCompany(_ company: Company) {
+        companies.append(company)
+        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+        tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
     }
 }
