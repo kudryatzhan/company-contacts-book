@@ -48,6 +48,16 @@ class CompanyManager {
         return index
     }
     
+    func deleteCompany(at index: Int) {
+        let companyToRemove = company(at: index)
+        companies.remove(at: index)
+        
+        CoreDataManager.shared.context.delete(companyToRemove)
+        CoreDataManager.shared.saveContext()
+    }
+    
+    // Core Data
+    
     private func fetchFromCoreData() {
         let context = CoreDataManager.shared.context
         let fetchRequest = NSFetchRequest<Company>(entityName: "Company")

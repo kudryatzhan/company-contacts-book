@@ -22,8 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
         
+        // DI
         let companiesController = CompaniesController()
         companiesController.companyManager = CompanyManager()
+        
         let navController = UINavigationController(rootViewController: companiesController)
         window?.rootViewController = navController
     }

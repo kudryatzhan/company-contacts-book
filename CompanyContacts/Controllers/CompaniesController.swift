@@ -22,7 +22,6 @@ class CompaniesController: UITableViewController {
         
         setupNavigationBar()
         setupTableView()
-//        fetchCompanies()
     }
     
     // MARK: - Helper methods
@@ -91,6 +90,26 @@ extension CompaniesController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        // Edit action
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
+            
+            completion(true)
+        }
+        editAction.backgroundColor = .lightGreen
+        
+        // Delete action
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+            self.companyManager.deleteCompany(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            completion(true)
+        }
+        deleteAction.backgroundColor = .lightRed
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
     }
 }
 
