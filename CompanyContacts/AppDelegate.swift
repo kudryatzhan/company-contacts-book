@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             navBarAppearance.backgroundColor = .lightRed
             
+            UINavigationBar.appearance().tintColor = .white
             UINavigationBar.appearance().prefersLargeTitles = true
             UINavigationBar.appearance().standardAppearance = navBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance

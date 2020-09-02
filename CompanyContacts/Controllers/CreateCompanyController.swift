@@ -14,5 +14,17 @@ class CreateCompanyController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .darkBlue
+        setupNavigationBar()
+    }
+    
+    fileprivate func setupNavigationBar() {
+        navigationItem.title = "Create Company"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                           target: self,
+                                                           action: #selector(cancelButtonTapped))
+    }
+    
+    @objc fileprivate func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
 }
