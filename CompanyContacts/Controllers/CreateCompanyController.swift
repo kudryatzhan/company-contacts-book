@@ -25,6 +25,9 @@ class CreateCompanyController: UIViewController {
         didSet {
             nameTextField.text = companyToEdit?.name
             datePicker.date = companyToEdit?.founded ?? Date()
+            if let imageData = companyToEdit?.imageData {
+                companyImageView.image = UIImage(data: imageData)                
+            }
         }
     }
     
@@ -134,15 +137,16 @@ class CreateCompanyController: UIViewController {
     
     @objc fileprivate func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard
-            let companyName = nameTextField.text, !companyName.isEmpty else { return }
+            let companyName = nameTextField.text, !companyName.isEmpty,
+            let imageData = companyImageView.image?.pngData() else { return }
         
         if companyToEdit != nil {
-            companyManager.updateCompany(companyToEdit!, withName: companyName, date: datePicker.date)
+            companyManager.updateCompany(companyToEdit!, withName: companyName, date: datePicker.date, imageData: imageData)
             dismiss(animated: true) {
                 self.delegate?.didEditCompany(self.companyToEdit!) // Safe to unwrap
             }
         } else {
-            let newCompany = companyManager.createCompanyWith(name: companyName, date: datePicker.date)
+            let newCompany = companyManager.createCompanyWith(name: companyName, date: datePicker.date, imageData: imageData)
             dismiss(animated: true) {
                 self.delegate?.didCreateCompany(newCompany)
             }
