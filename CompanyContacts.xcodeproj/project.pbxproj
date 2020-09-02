@@ -13,6 +13,8 @@
 		B224FF2A24FF2C0900465ECF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B224FF2824FF2C0900465ECF /* Main.storyboard */; };
 		B224FF2C24FF2C0B00465ECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B224FF2B24FF2C0B00465ECF /* Assets.xcassets */; };
 		B224FF2F24FF2C0B00465ECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B224FF2D24FF2C0B00465ECF /* LaunchScreen.storyboard */; };
+		B224FF3724FF349E00465ECF /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF3624FF349E00465ECF /* UIColor+Ext.swift */; };
+		B224FF3C24FF36D900465ECF /* CustomNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF3B24FF36D900465ECF /* CustomNavController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		B224FF2B24FF2C0B00465ECF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B224FF2E24FF2C0B00465ECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B224FF3024FF2C0B00465ECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B224FF3624FF349E00465ECF /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		B224FF3B24FF36D900465ECF /* CustomNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +67,18 @@
 				B224FF2B24FF2C0B00465ECF /* Assets.xcassets */,
 				B224FF2D24FF2C0B00465ECF /* LaunchScreen.storyboard */,
 				B224FF3024FF2C0B00465ECF /* Info.plist */,
+				B224FF3824FF35DB00465ECF /* Supporting Files */,
 			);
 			path = CompanyContacts;
+			sourceTree = "<group>";
+		};
+		B224FF3824FF35DB00465ECF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B224FF3624FF349E00465ECF /* UIColor+Ext.swift */,
+				B224FF3B24FF36D900465ECF /* CustomNavController.swift */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +153,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B224FF2724FF2C0900465ECF /* ViewController.swift in Sources */,
+				B224FF3724FF349E00465ECF /* UIColor+Ext.swift in Sources */,
 				B224FF2324FF2C0900465ECF /* AppDelegate.swift in Sources */,
+				B224FF3C24FF36D900465ECF /* CustomNavController.swift in Sources */,
 				B224FF2524FF2C0900465ECF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
