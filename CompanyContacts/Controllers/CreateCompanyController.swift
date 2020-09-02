@@ -103,15 +103,17 @@ class CreateCompanyController: UIViewController {
     
     @objc fileprivate func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let companyName = nameTextField.text, !companyName.isEmpty else { return }
-
+        
         if companyToEdit != nil {
             companyManager.updateCompany(companyToEdit!, withName: companyName)
-            delegate?.didEditCompany(companyToEdit!) // Safe to unwrap
+            dismiss(animated: true) {
+                self.delegate?.didEditCompany(self.companyToEdit!) // Safe to unwrap
+            }
         } else {
             let newCompany = companyManager.createCompany(with: companyName)
-            delegate?.didCreateCompany(newCompany)
+            dismiss(animated: true) {
+                self.delegate?.didCreateCompany(newCompany)
+            }
         }
-        
-        dismiss(animated: true)
     }
 }
