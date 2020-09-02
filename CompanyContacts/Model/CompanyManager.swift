@@ -27,10 +27,11 @@ class CompanyManager {
     // MARK: - CRUD
     
     @discardableResult
-    func createCompany(with name: String) -> Company {
+    func createCompanyWith(name: String, date: Date) -> Company {
         let context = CoreDataManager.shared.context
         let newCompany = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context) as! Company
         newCompany.setValue(name, forKey: "name")
+        newCompany.setValue(date, forKey: "founded")
         companies.append(newCompany)
         CoreDataManager.shared.saveContext()
         
@@ -56,8 +57,9 @@ class CompanyManager {
         CoreDataManager.shared.saveContext()
     }
     
-    func updateCompany(_ company: Company, withName name: String) {
+    func updateCompany(_ company: Company, withName name: String, date: Date) {
         company.name = name
+        company.founded = date
         
         CoreDataManager.shared.saveContext()
     }

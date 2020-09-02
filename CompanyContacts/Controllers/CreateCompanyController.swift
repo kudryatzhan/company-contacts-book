@@ -24,6 +24,7 @@ class CreateCompanyController: UIViewController {
     var companyToEdit: Company? {
         didSet {
             nameTextField.text = companyToEdit?.name
+            datePicker.date = companyToEdit?.founded ?? Date()
         }
     }
     
@@ -42,6 +43,14 @@ class CreateCompanyController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.backgroundColor = .white
         return textField
+    }()
+    
+    let datePicker: UIDatePicker = {
+        let dp = UIDatePicker()
+        dp.datePickerMode = .date
+        dp.maximumDate = Date()
+        dp.translatesAutoresizingMaskIntoConstraints = false
+        return dp
     }()
     
     // MARK: - View lifecycle
@@ -72,14 +81,19 @@ class CreateCompanyController: UIViewController {
         infoBackgroundView.addSubview(nameLabel)
         nameLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
         nameLabel.topAnchor.constraint(equalTo: infoBackgroundView.topAnchor, constant: 16).isActive = true
-        nameLabel.bottomAnchor.constraint(equalTo: infoBackgroundView.bottomAnchor, constant: -16).isActive = true
+//        nameLabel.bottomAnchor.constraint(equalTo: infoBackgroundView.bottomAnchor, constant: -16).isActive = true
         
         // Name text field
         infoBackgroundView.addSubview(nameTextField)
         nameTextField.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 16).isActive = true
-        nameTextField.centerYAnchor.constraint(equalTo: infoBackgroundView.centerYAnchor).isActive = true
+        nameTextField.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor).isActive = true
         nameTextField.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
         
+        // Date picker
+        infoBackgroundView.addSubview(datePicker)
+        datePicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 16).isActive = true
+        datePicker.centerXAnchor.constraint(equalTo: infoBackgroundView.centerXAnchor).isActive = true
+        datePicker.bottomAnchor.constraint(equalTo: infoBackgroundView.bottomAnchor, constant: -16).isActive = true
     }
     
     fileprivate func setupNavigationBar() {
@@ -102,15 +116,16 @@ class CreateCompanyController: UIViewController {
     }
     
     @objc fileprivate func saveButtonTapped(_ sender: UIBarButtonItem) {
-        guard let companyName = nameTextField.text, !companyName.isEmpty else { return }
+        guard
+            let companyName = nameTextField.text, !companyName.isEmpty else { return }
         
         if companyToEdit != nil {
-            companyManager.updateCompany(companyToEdit!, withName: companyName)
+            companyManager.updateCompany(companyToEdit!, withName: companyName, date: datePicker.date)
             dismiss(animated: true) {
                 self.delegate?.didEditCompany(self.companyToEdit!) // Safe to unwrap
             }
         } else {
-            let newCompany = companyManager.createCompany(with: companyName)
+            let newCompany = companyManager.createCompanyWith(name: companyName, date: datePicker.date)
             dismiss(animated: true) {
                 self.delegate?.didCreateCompany(newCompany)
             }

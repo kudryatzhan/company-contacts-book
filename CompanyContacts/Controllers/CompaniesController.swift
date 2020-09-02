@@ -69,8 +69,14 @@ extension CompaniesController {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellReuseIdentifier, for: indexPath)
         let company = companyManager.company(at: indexPath.row)
         
+        if let name = company.name, let founded = company.founded {
+            let dateString = DateFormatter.localizedString(from: founded, dateStyle: .medium, timeStyle: .none)
+            cell.textLabel?.text = "\(name) - Founded: \(dateString)"
+        } else {
+            cell.textLabel?.text = company.name
+        }
+        
         cell.backgroundColor = .cellColor
-        cell.textLabel?.text = company.name
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = .boldSystemFont(ofSize: 16)
         
