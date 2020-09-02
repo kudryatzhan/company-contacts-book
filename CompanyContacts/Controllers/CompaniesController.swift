@@ -23,7 +23,6 @@ class CompaniesController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(#function)
         setupNavigationBar()
         setupTableView()
     }
@@ -84,7 +83,7 @@ extension CompaniesController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = .tableViewHeaderColor
+        view.backgroundColor = .lightBlue
         return view
     }
     
