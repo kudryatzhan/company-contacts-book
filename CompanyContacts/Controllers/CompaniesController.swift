@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CompaniesController.swift
 //  CompanyContacts
 //
 //  Created by Kudryatzhan Arziyev on 9/2/20.
@@ -8,13 +8,22 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class CompaniesController: UITableViewController {
+    
+    // MARK: - Properties
+    
+    let companies = [
+        Company(name: "Apple", foundDate: Date()),
+        Company(name: "Google", foundDate: Date()),
+        Company(name: "Facebook", foundDate: Date())
+    ]
 
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(#function)
         setupNavigationBar()
         setupTableView()
     }
@@ -28,23 +37,10 @@ class ViewController: UITableViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(addButtonTapped))
-
-        // Navigation bar
-        if #available(iOS 13.0, *) {
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.backgroundColor = .navigationBarColor
-            
-            navigationController?.navigationBar.prefersLargeTitles = true
-            navigationController?.navigationBar.standardAppearance = navBarAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        }
     }
     
     fileprivate func setupTableView() {
-        tableView.backgroundColor = .tableViewColor
+        tableView.backgroundColor = .darkBlue
         tableView.tableFooterView = UIView() // Blank footer
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.cellReuseIdentifier)
         tableView.separatorColor = .white
@@ -53,24 +49,28 @@ class ViewController: UITableViewController {
     // MARK: - IBActions
     
     @objc fileprivate func addButtonTapped(_ sender: UIBarButtonItem) {
-        print(#function)
+        let createCompanyController = CreateCompanyController()
+        let navController = UINavigationController(rootViewController: createCompanyController)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true, completion: nil)
     }
 }
 
 // MARK: - UITableViewDataSource
 
-extension ViewController {
+extension CompaniesController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return companies.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellReuseIdentifier, for: indexPath)
+        let company = companies[indexPath.row]
         
         cell.backgroundColor = .cellColor
-        cell.textLabel?.text = "\(indexPath.row)"
+        cell.textLabel?.text = company.name
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = .boldSystemFont(ofSize: 16)
         
@@ -80,7 +80,7 @@ extension ViewController {
 
 // MARK: - UITableviewDelegate
 
-extension ViewController {
+extension CompaniesController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
