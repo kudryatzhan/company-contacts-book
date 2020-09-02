@@ -11,6 +11,7 @@ import CoreData
 
 protocol CreateCompanyControllerDelegate: class {
     func didCreateCompany(_ company: Company)
+    func didEditCompany(_ company: Company)
 }
 
 class CreateCompanyController: UIViewController {
@@ -19,6 +20,12 @@ class CreateCompanyController: UIViewController {
     
     var companyManager: CompanyManager!
     weak var delegate: CreateCompanyControllerDelegate?
+    
+    var companyToEdit: Company? {
+        didSet {
+            nameTextField.text = companyToEdit?.name
+        }
+    }
     
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -76,7 +83,11 @@ class CreateCompanyController: UIViewController {
     }
     
     fileprivate func setupNavigationBar() {
-        navigationItem.title = "Create Company"
+        if companyToEdit != nil {
+            navigationItem.title = "Edit Company"
+        } else {
+            navigationItem.title = "Create Company"
+        }
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
                                                            target: self,
                                                            action: #selector(cancelButtonTapped))
@@ -93,10 +104,14 @@ class CreateCompanyController: UIViewController {
     @objc fileprivate func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let companyName = nameTextField.text, !companyName.isEmpty else { return }
 
-        let newCompany = companyManager.createCompany(with: companyName)
-        
-        dismiss(animated: true) {
-            self.delegate?.didCreateCompany(newCompany)
+        if companyToEdit != nil {
+            companyManager.updateCompany(companyToEdit!, withName: companyName)
+            delegate?.didEditCompany(companyToEdit!) // Safe to unwrap
+        } else {
+            let newCompany = companyManager.createCompany(with: companyName)
+            delegate?.didCreateCompany(newCompany)
         }
+        
+        dismiss(animated: true)
     }
 }

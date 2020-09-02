@@ -56,6 +56,12 @@ class CompanyManager {
         CoreDataManager.shared.saveContext()
     }
     
+    func updateCompany(_ company: Company, withName name: String) {
+        company.name = name
+        
+        CoreDataManager.shared.saveContext()
+    }
+    
     // Core Data
     
     private func fetchFromCoreData() {

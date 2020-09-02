@@ -96,6 +96,14 @@ extension CompaniesController {
         
         // Edit action
         let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
+            let editCompanyController = CreateCompanyController()
+            editCompanyController.companyToEdit = self.companyManager.company(at: indexPath.row)
+            editCompanyController.delegate = self
+            editCompanyController.companyManager = self.companyManager
+            
+            let navController = UINavigationController(rootViewController: editCompanyController)
+            navController.modalPresentationStyle = .fullScreen
+            self.present(navController, animated: true, completion: nil)
             
             completion(true)
         }
@@ -122,5 +130,11 @@ extension CompaniesController: CreateCompanyControllerDelegate {
         let newIndexPath = IndexPath(row: index, section: 0)
         tableView.insertRows(at: [newIndexPath], with: .automatic)
         tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
+    }
+    
+    func didEditCompany(_ company: Company) {
+        let index = companyManager.index(of: company)
+        let indexPath = IndexPath(row: index, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
