@@ -15,8 +15,10 @@
 		B224FF2F24FF2C0B00465ECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B224FF2D24FF2C0B00465ECF /* LaunchScreen.storyboard */; };
 		B224FF3724FF349E00465ECF /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF3624FF349E00465ECF /* UIColor+theme.swift */; };
 		B224FF3E24FF41E500465ECF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF3D24FF41E500465ECF /* Constants.swift */; };
-		B224FF4024FF4F6100465ECF /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF3F24FF4F6100465ECF /* Company.swift */; };
 		B224FF4424FF53F500465ECF /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF4324FF53F500465ECF /* CreateCompanyController.swift */; };
+		B224FF6A24FF87FE00465ECF /* CompanyContactsModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B224FF6824FF87FE00465ECF /* CompanyContactsModels.xcdatamodeld */; };
+		B22D1F3E24FF96BA00108651 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D1F3D24FF96BA00108651 /* CoreDataManager.swift */; };
+		B2321D1724FF9B0600B84C04 /* CompanyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2321D1624FF9B0600B84C04 /* CompanyManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +32,10 @@
 		B224FF3024FF2C0B00465ECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B224FF3624FF349E00465ECF /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		B224FF3D24FF41E500465ECF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B224FF3F24FF4F6100465ECF /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		B224FF4324FF53F500465ECF /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
+		B224FF6924FF87FE00465ECF /* CompanyContactsModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompanyContactsModels.xcdatamodel; sourceTree = "<group>"; };
+		B22D1F3D24FF96BA00108651 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B2321D1624FF9B0600B84C04 /* CompanyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,7 @@
 				B224FF2B24FF2C0B00465ECF /* Assets.xcassets */,
 				B224FF2D24FF2C0B00465ECF /* LaunchScreen.storyboard */,
 				B224FF3024FF2C0B00465ECF /* Info.plist */,
+				B224FF6824FF87FE00465ECF /* CompanyContactsModels.xcdatamodeld */,
 				B224FF3824FF35DB00465ECF /* Supporting Files */,
 			);
 			path = CompanyContacts;
@@ -82,6 +87,7 @@
 			children = (
 				B224FF3D24FF41E500465ECF /* Constants.swift */,
 				B224FF3624FF349E00465ECF /* UIColor+theme.swift */,
+				B22D1F3D24FF96BA00108651 /* CoreDataManager.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -89,7 +95,7 @@
 		B224FF4124FF4F6700465ECF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B224FF3F24FF4F6100465ECF /* Company.swift */,
+				B2321D1624FF9B0600B84C04 /* CompanyManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,10 +183,12 @@
 				B224FF2724FF2C0900465ECF /* CompaniesController.swift in Sources */,
 				B224FF3724FF349E00465ECF /* UIColor+theme.swift in Sources */,
 				B224FF2324FF2C0900465ECF /* AppDelegate.swift in Sources */,
-				B224FF4024FF4F6100465ECF /* Company.swift in Sources */,
+				B224FF6A24FF87FE00465ECF /* CompanyContactsModels.xcdatamodeld in Sources */,
 				B224FF2524FF2C0900465ECF /* SceneDelegate.swift in Sources */,
+				B22D1F3E24FF96BA00108651 /* CoreDataManager.swift in Sources */,
 				B224FF3E24FF41E500465ECF /* Constants.swift in Sources */,
 				B224FF4424FF53F500465ECF /* CreateCompanyController.swift in Sources */,
+				B2321D1724FF9B0600B84C04 /* CompanyManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +384,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B224FF6824FF87FE00465ECF /* CompanyContactsModels.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B224FF6924FF87FE00465ECF /* CompanyContactsModels.xcdatamodel */,
+			);
+			currentVersion = B224FF6924FF87FE00465ECF /* CompanyContactsModels.xcdatamodel */;
+			path = CompanyContactsModels.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B224FF1724FF2C0900465ECF /* Project object */;
 }

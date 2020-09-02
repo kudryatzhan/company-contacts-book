@@ -7,17 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
 class CompaniesController: UITableViewController {
     
     // MARK: - Properties
     
-    var companies = [
-        Company(name: "Apple", foundDate: Date()),
-        Company(name: "Google", foundDate: Date()),
-        Company(name: "Facebook", foundDate: Date())
-    ]
-
+    var companyManager: CompanyManager!
+    
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
@@ -25,10 +22,11 @@ class CompaniesController: UITableViewController {
         
         setupNavigationBar()
         setupTableView()
+//        fetchCompanies()
     }
     
     // MARK: - Helper methods
-
+    
     fileprivate func setupNavigationBar() {
         // Navigation item
         navigationItem.title = "Companies"
@@ -45,11 +43,12 @@ class CompaniesController: UITableViewController {
         tableView.separatorColor = .white
     }
     
-    // MARK: - IBActions
+    // MARK: - Actions
     
     @objc fileprivate func addButtonTapped(_ sender: UIBarButtonItem) {
         let createCompanyController = CreateCompanyController()
         createCompanyController.delegate = self
+        createCompanyController.companyManager = companyManager
         
         let navController = UINavigationController(rootViewController: createCompanyController)
         navController.modalPresentationStyle = .fullScreen
@@ -63,13 +62,13 @@ class CompaniesController: UITableViewController {
 extension CompaniesController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return companies.count
+        return companyManager.numberOfCompanies
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellReuseIdentifier, for: indexPath)
-        let company = companies[indexPath.row]
+        let company = companyManager.company(at: indexPath.row)
         
         cell.backgroundColor = .cellColor
         cell.textLabel?.text = company.name
@@ -100,8 +99,8 @@ extension CompaniesController {
 extension CompaniesController: CreateCompanyControllerDelegate {
     
     func didCreateCompany(_ company: Company) {
-        companies.append(company)
-        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+        let index = companyManager.index(of: company)
+        let newIndexPath = IndexPath(row: index, section: 0)
         tableView.insertRows(at: [newIndexPath], with: .automatic)
         tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
     }
