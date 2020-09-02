@@ -23,11 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             navBarAppearance.backgroundColor = .lightRed
-            
-            UINavigationBar.appearance().tintColor = .white
-            UINavigationBar.appearance().prefersLargeTitles = true
             UINavigationBar.appearance().standardAppearance = navBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+            
+            // Needed so nav. controller of imagePickerController changes its style
+            UINavigationBar.appearance().isTranslucent = false
+            UINavigationBar.appearance().barTintColor = .lightRed
+            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().prefersLargeTitles = true
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
         }
         
         return true

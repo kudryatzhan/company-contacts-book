@@ -53,6 +53,18 @@ class CreateCompanyController: UIViewController {
         return dp
     }()
     
+    lazy var companyImageView: UIImageView = {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "select_photo_empty"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 50
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto))
+        imageView.addGestureRecognizer(tapGestureRecognizer)
+        return imageView
+    }()
+    
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
@@ -75,13 +87,18 @@ class CreateCompanyController: UIViewController {
         infoBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         infoBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         infoBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        //        infoBackgroundView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        // Image view
+        infoBackgroundView.addSubview(companyImageView)
+        companyImageView.topAnchor.constraint(equalTo: infoBackgroundView.topAnchor, constant: 16).isActive = true
+        companyImageView.centerXAnchor.constraint(equalTo: infoBackgroundView.centerXAnchor).isActive = true
+        companyImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        companyImageView.heightAnchor.constraint(equalTo: companyImageView.widthAnchor).isActive = true
         
         // Name label
         infoBackgroundView.addSubview(nameLabel)
         nameLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: infoBackgroundView.topAnchor, constant: 16).isActive = true
-//        nameLabel.bottomAnchor.constraint(equalTo: infoBackgroundView.bottomAnchor, constant: -16).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: companyImageView.bottomAnchor, constant: 16).isActive = true
         
         // Name text field
         infoBackgroundView.addSubview(nameTextField)
@@ -130,5 +147,30 @@ class CreateCompanyController: UIViewController {
                 self.delegate?.didCreateCompany(newCompany)
             }
         }
+    }
+    
+    @objc fileprivate func handleSelectPhoto(_ sender: UITapGestureRecognizer) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.modalPresentationStyle = .fullScreen
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+
+extension CreateCompanyController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let pickedImage = info[.editedImage] as? UIImage {
+            companyImageView.image = pickedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 }
