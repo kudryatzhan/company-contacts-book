@@ -10,6 +10,8 @@ import UIKit
 
 class CompanyCell: UITableViewCell {
     
+    // MARK: - Properties
+    
     let companyImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,6 +30,8 @@ class CompanyCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Initializers
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -39,6 +43,8 @@ class CompanyCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Helper methods
     
     fileprivate func setupUI() {
         // Image view

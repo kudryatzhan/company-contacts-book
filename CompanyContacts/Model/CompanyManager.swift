@@ -21,7 +21,7 @@ class CompanyManager {
     // MARK: - Initializers
     
     init() {
-        fetchFromCoreData()
+        fetchCompaniesFromCD()
     }
     
     // MARK: - CRUD
@@ -78,7 +78,7 @@ class CompanyManager {
     
     // Core Data
     
-    private func fetchFromCoreData() {
+    private func fetchCompaniesFromCD() {
         let context = CoreDataManager.shared.context
         let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
         

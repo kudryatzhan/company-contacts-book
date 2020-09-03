@@ -15,11 +15,13 @@
 		B224FF2F24FF2C0B00465ECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B224FF2D24FF2C0B00465ECF /* LaunchScreen.storyboard */; };
 		B224FF3724FF349E00465ECF /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF3624FF349E00465ECF /* UIColor+theme.swift */; };
 		B224FF3E24FF41E500465ECF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF3D24FF41E500465ECF /* Constants.swift */; };
-		B224FF4424FF53F500465ECF /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF4324FF53F500465ECF /* CreateCompanyController.swift */; };
+		B224FF4424FF53F500465ECF /* CreateEditCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF4324FF53F500465ECF /* CreateEditCompanyController.swift */; };
 		B224FF6A24FF87FE00465ECF /* CompanyContactsModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B224FF6824FF87FE00465ECF /* CompanyContactsModels.xcdatamodeld */; };
 		B22D1F3E24FF96BA00108651 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D1F3D24FF96BA00108651 /* CoreDataManager.swift */; };
 		B2321D1724FF9B0600B84C04 /* CompanyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2321D1624FF9B0600B84C04 /* CompanyManager.swift */; };
 		B23E0EC72500A3C900454CF4 /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23E0EC62500A3C900454CF4 /* CompanyCell.swift */; };
+		B23E0EC92500B20F00454CF4 /* CompaniesController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23E0EC82500B20F00454CF4 /* CompaniesController+UITableView.swift */; };
+		B23E0ECC2500B29900454CF4 /* CompaniesController+CreateEditCompanyControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23E0ECB2500B29900454CF4 /* CompaniesController+CreateEditCompanyControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,11 +35,13 @@
 		B224FF3024FF2C0B00465ECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B224FF3624FF349E00465ECF /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		B224FF3D24FF41E500465ECF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B224FF4324FF53F500465ECF /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
+		B224FF4324FF53F500465ECF /* CreateEditCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEditCompanyController.swift; sourceTree = "<group>"; };
 		B224FF6924FF87FE00465ECF /* CompanyContactsModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompanyContactsModels.xcdatamodel; sourceTree = "<group>"; };
 		B22D1F3D24FF96BA00108651 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B2321D1624FF9B0600B84C04 /* CompanyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyManager.swift; sourceTree = "<group>"; };
 		B23E0EC62500A3C900454CF4 /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
+		B23E0EC82500B20F00454CF4 /* CompaniesController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompaniesController+UITableView.swift"; sourceTree = "<group>"; };
+		B23E0ECB2500B29900454CF4 /* CompaniesController+CreateEditCompanyControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompaniesController+CreateEditCompanyControllerDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +110,8 @@
 		B224FF4224FF50BA00465ECF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B224FF2624FF2C0900465ECF /* CompaniesController.swift */,
-				B224FF4324FF53F500465ECF /* CreateCompanyController.swift */,
+				B23E0ECA2500B22200454CF4 /* Companies List */,
+				B23E0ECD2500B2CE00454CF4 /* Create & Edit Company */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -118,6 +122,24 @@
 				B23E0EC62500A3C900454CF4 /* CompanyCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B23E0ECA2500B22200454CF4 /* Companies List */ = {
+			isa = PBXGroup;
+			children = (
+				B224FF2624FF2C0900465ECF /* CompaniesController.swift */,
+				B23E0EC82500B20F00454CF4 /* CompaniesController+UITableView.swift */,
+				B23E0ECB2500B29900454CF4 /* CompaniesController+CreateEditCompanyControllerDelegate.swift */,
+			);
+			path = "Companies List";
+			sourceTree = "<group>";
+		};
+		B23E0ECD2500B2CE00454CF4 /* Create & Edit Company */ = {
+			isa = PBXGroup;
+			children = (
+				B224FF4324FF53F500465ECF /* CreateEditCompanyController.swift */,
+			);
+			path = "Create & Edit Company";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,7 +213,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23E0ECC2500B29900454CF4 /* CompaniesController+CreateEditCompanyControllerDelegate.swift in Sources */,
 				B224FF2724FF2C0900465ECF /* CompaniesController.swift in Sources */,
+				B23E0EC92500B20F00454CF4 /* CompaniesController+UITableView.swift in Sources */,
 				B224FF3724FF349E00465ECF /* UIColor+theme.swift in Sources */,
 				B224FF2324FF2C0900465ECF /* AppDelegate.swift in Sources */,
 				B224FF6A24FF87FE00465ECF /* CompanyContactsModels.xcdatamodeld in Sources */,
@@ -199,7 +223,7 @@
 				B23E0EC72500A3C900454CF4 /* CompanyCell.swift in Sources */,
 				B22D1F3E24FF96BA00108651 /* CoreDataManager.swift in Sources */,
 				B224FF3E24FF41E500465ECF /* Constants.swift in Sources */,
-				B224FF4424FF53F500465ECF /* CreateCompanyController.swift in Sources */,
+				B224FF4424FF53F500465ECF /* CreateEditCompanyController.swift in Sources */,
 				B2321D1724FF9B0600B84C04 /* CompanyManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,78 +1,12 @@
 //
-//  CompaniesController.swift
+//  CompaniesController+UITableView.swift
 //  CompanyContacts
 //
-//  Created by Kudryatzhan Arziyev on 9/2/20.
+//  Created by Kudryatzhan Arziyev on 9/3/20.
 //  Copyright © 2020 Kudryatzhan Arziyev. All rights reserved.
 //
 
 import UIKit
-import CoreData
-
-class CompaniesController: UITableViewController {
-    
-    // MARK: - Properties
-    
-    var companyManager: CompanyManager!
-    
-    // MARK: - View lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupNavigationBar()
-        setupTableView()
-    }
-    
-    // MARK: - Helper methods
-    
-    fileprivate func setupNavigationBar() {
-        // Navigation item
-        navigationItem.title = "Companies"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"),
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(addButtonTapped))
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset",
-                                                           style: .plain,
-                                                           target: self,
-                                                           action: #selector(resetButtonTapped))
-    }
-    
-    fileprivate func setupTableView() {
-        tableView.backgroundColor = .darkBlue
-        tableView.tableFooterView = UIView() // Blank footer
-        tableView.register(CompanyCell.self, forCellReuseIdentifier: K.companyCellReuseIdentifier)
-        tableView.separatorColor = .white
-        tableView.rowHeight = 60
-    }
-    
-    // MARK: - Actions
-    
-    @objc fileprivate func addButtonTapped(_ sender: UIBarButtonItem) {
-        let createCompanyController = CreateCompanyController()
-        createCompanyController.delegate = self
-        createCompanyController.companyManager = companyManager
-        
-        let navController = UINavigationController(rootViewController: createCompanyController)
-        navController.modalPresentationStyle = .fullScreen
-        
-        present(navController, animated: true, completion: nil)
-    }
-    
-    @objc fileprivate func resetButtonTapped(_ sender: UIBarButtonItem) {
-
-        var indexPathsToRemove = [IndexPath]()
-        for row in 0..<companyManager.numberOfCompanies {
-            let indexPath = IndexPath(row: row, section: 0)
-            indexPathsToRemove.append(indexPath)
-        }
-        
-        companyManager.deleteAllCompanies()
-        tableView.deleteRows(at: indexPathsToRemove, with: .left)
-    }
-}
 
 // MARK: - UITableViewDataSource
 
@@ -133,7 +67,7 @@ extension CompaniesController {
         
         // Edit action
         let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
-            let editCompanyController = CreateCompanyController()
+            let editCompanyController = CreateEditCompanyController()
             editCompanyController.companyToEdit = self.companyManager.company(at: indexPath.row)
             editCompanyController.delegate = self
             editCompanyController.companyManager = self.companyManager
@@ -155,23 +89,5 @@ extension CompaniesController {
         deleteAction.backgroundColor = .lightRed
         
         return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
-    }
-}
-
-// MARK: - CreateCompanyControllerDelegate
-
-extension CompaniesController: CreateCompanyControllerDelegate {
-    
-    func didCreateCompany(_ company: Company) {
-        let index = companyManager.index(of: company)
-        let newIndexPath = IndexPath(row: index, section: 0)
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
-        tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
-    }
-    
-    func didEditCompany(_ company: Company) {
-        let index = companyManager.index(of: company)
-        let indexPath = IndexPath(row: index, section: 0)
-        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }

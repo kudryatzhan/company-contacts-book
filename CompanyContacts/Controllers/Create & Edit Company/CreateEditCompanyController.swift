@@ -9,17 +9,17 @@
 import UIKit
 import CoreData
 
-protocol CreateCompanyControllerDelegate: class {
+protocol CreateEditCompanyControllerDelegate: class {
     func didCreateCompany(_ company: Company)
     func didEditCompany(_ company: Company)
 }
 
-class CreateCompanyController: UIViewController {
+class CreateEditCompanyController: UIViewController {
     
     // MARK: - Properties
     
     var companyManager: CompanyManager!
-    weak var delegate: CreateCompanyControllerDelegate?
+    weak var delegate: CreateEditCompanyControllerDelegate?
     
     var companyToEdit: Company? {
         didSet {
@@ -166,7 +166,7 @@ class CreateCompanyController: UIViewController {
 
 // MARK: - UIImagePickerControllerDelegate
 
-extension CreateCompanyController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension CreateEditCompanyController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let pickedImage = info[.editedImage] as? UIImage {
