@@ -14,6 +14,8 @@ class EmployeeManager {
     
     private var employees = [Employee]()
     
+    private var company: Company?
+    
     var numberOfEmployees: Int {
         return employees.count
     }
@@ -22,8 +24,8 @@ class EmployeeManager {
     
     init(company: Company) {
         // FIXME: Fetch employees from specified company ONLY
-        print(company.name!)
-        fetchEmployeesFromCD()
+        self.company = company
+        fetchEmployees()
     }
     
     // MARK: - CRUD
@@ -39,14 +41,16 @@ class EmployeeManager {
         return index
     }
     
-    @discardableResult
     func createEmployeeWith(name: String) -> Employee {
         let context = CoreDataManager.shared.context
         let newEmployee = NSEntityDescription.insertNewObject(forEntityName: "Employee", into: context) as! Employee
         
         newEmployee.setValue(name, forKey: "name")
-        
         employees.append(newEmployee)
+        
+        // Set relationships
+        newEmployee.company = company
+    
         CoreDataManager.shared.saveContext()
         
         return newEmployee
@@ -54,14 +58,9 @@ class EmployeeManager {
     
     // Core Data
     
-    private func fetchEmployeesFromCD() {
-        let context = CoreDataManager.shared.context
-        let fetchRequest = NSFetchRequest<Employee>(entityName: "Employee")
+    private func fetchEmployees() {
+        guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }
         
-        do {
-            employees = try context.fetch(fetchRequest)
-        } catch {
-            print("Error fetching from Core Data: \(error)")
-        }
+        self.employees = companyEmployees
     }
 }
