@@ -90,4 +90,11 @@ extension CompaniesController {
         
         return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let employeesController = EmployeesController()
+        let company = companyManager.company(at: indexPath.row)
+        employeesController.currentCompany = company
+        navigationController?.pushViewController(employeesController, animated: true)
+    }
 }
