@@ -28,6 +28,7 @@
 		B2CE3F5C2500D63C004FC5E4 /* EmployeeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE3F5B2500D63C004FC5E4 /* EmployeeManager.swift */; };
 		B2CE3F5E2500E805004FC5E4 /* EmployeesController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE3F5D2500E805004FC5E4 /* EmployeesController+UITableView.swift */; };
 		B2CE3F602500EA1B004FC5E4 /* EmployeeController+CreateEmployeeControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE3F5F2500EA1B004FC5E4 /* EmployeeController+CreateEmployeeControllerDelegate.swift */; };
+		B2CE3F6225011471004FC5E4 /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CE3F6125011471004FC5E4 /* EmployeeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		B2CE3F5B2500D63C004FC5E4 /* EmployeeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeManager.swift; sourceTree = "<group>"; };
 		B2CE3F5D2500E805004FC5E4 /* EmployeesController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmployeesController+UITableView.swift"; sourceTree = "<group>"; };
 		B2CE3F5F2500EA1B004FC5E4 /* EmployeeController+CreateEmployeeControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmployeeController+CreateEmployeeControllerDelegate.swift"; sourceTree = "<group>"; };
+		B2CE3F6125011471004FC5E4 /* EmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				B23E0EC62500A3C900454CF4 /* CompanyCell.swift */,
+				B2CE3F6125011471004FC5E4 /* EmployeeCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				B224FF3E24FF41E500465ECF /* Constants.swift in Sources */,
 				B224FF4424FF53F500465ECF /* CreateEditCompanyController.swift in Sources */,
 				B2321D1724FF9B0600B84C04 /* CompanyManager.swift in Sources */,
+				B2CE3F6225011471004FC5E4 /* EmployeeCell.swift in Sources */,
 				B2CE3F5E2500E805004FC5E4 /* EmployeesController+UITableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

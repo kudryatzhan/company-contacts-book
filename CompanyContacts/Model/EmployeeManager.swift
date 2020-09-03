@@ -9,7 +9,7 @@
 import CoreData
 
 class EmployeeManager {
-
+    
     // MARK: - Properties
     
     private var employees = [Employee]()
@@ -41,16 +41,16 @@ class EmployeeManager {
         return index
     }
     
-    func createEmployeeWith(name: String) -> Employee {
+    func createEmployeeWith(name: String, birthday: Date) -> Employee {
         let context = CoreDataManager.shared.context
         let newEmployee = NSEntityDescription.insertNewObject(forEntityName: "Employee", into: context) as! Employee
         
-        newEmployee.setValue(name, forKey: "name")
+        newEmployee.name = name
+        newEmployee.birthday = birthday
+        newEmployee.company = company // Set relationships
+        
         employees.append(newEmployee)
         
-        // Set relationships
-        newEmployee.company = company
-    
         CoreDataManager.shared.saveContext()
         
         return newEmployee

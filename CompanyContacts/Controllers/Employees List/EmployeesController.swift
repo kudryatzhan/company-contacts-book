@@ -22,7 +22,7 @@ class EmployeesController: UITableViewController {
     
     fileprivate func setupTableView() {
         tableView.backgroundColor = .darkBlue
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        tableView.register(EmployeeCell.self, forCellReuseIdentifier: "EmployeeCell")
     }
     
     fileprivate func setupNavigationBar() {
