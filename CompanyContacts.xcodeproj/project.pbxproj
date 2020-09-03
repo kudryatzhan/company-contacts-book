@@ -19,6 +19,7 @@
 		B224FF6A24FF87FE00465ECF /* CompanyContactsModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B224FF6824FF87FE00465ECF /* CompanyContactsModels.xcdatamodeld */; };
 		B22D1F3E24FF96BA00108651 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D1F3D24FF96BA00108651 /* CoreDataManager.swift */; };
 		B2321D1724FF9B0600B84C04 /* CompanyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2321D1624FF9B0600B84C04 /* CompanyManager.swift */; };
+		B23E0EC72500A3C900454CF4 /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23E0EC62500A3C900454CF4 /* CompanyCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		B224FF6924FF87FE00465ECF /* CompanyContactsModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompanyContactsModels.xcdatamodel; sourceTree = "<group>"; };
 		B22D1F3D24FF96BA00108651 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B2321D1624FF9B0600B84C04 /* CompanyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyManager.swift; sourceTree = "<group>"; };
+		B23E0EC62500A3C900454CF4 /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				B224FF2224FF2C0900465ECF /* AppDelegate.swift */,
 				B224FF2424FF2C0900465ECF /* SceneDelegate.swift */,
 				B224FF4124FF4F6700465ECF /* Model */,
+				B23E0EC52500A3B600454CF4 /* Views */,
 				B224FF4224FF50BA00465ECF /* Controllers */,
 				B224FF2824FF2C0900465ECF /* Main.storyboard */,
 				B224FF2B24FF2C0B00465ECF /* Assets.xcassets */,
@@ -107,6 +110,14 @@
 				B224FF4324FF53F500465ECF /* CreateCompanyController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B23E0EC52500A3B600454CF4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B23E0EC62500A3C900454CF4 /* CompanyCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,6 +196,7 @@
 				B224FF2324FF2C0900465ECF /* AppDelegate.swift in Sources */,
 				B224FF6A24FF87FE00465ECF /* CompanyContactsModels.xcdatamodeld in Sources */,
 				B224FF2524FF2C0900465ECF /* SceneDelegate.swift in Sources */,
+				B23E0EC72500A3C900454CF4 /* CompanyCell.swift in Sources */,
 				B22D1F3E24FF96BA00108651 /* CoreDataManager.swift in Sources */,
 				B224FF3E24FF41E500465ECF /* Constants.swift in Sources */,
 				B224FF4424FF53F500465ECF /* CreateCompanyController.swift in Sources */,

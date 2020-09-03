@@ -43,8 +43,9 @@ class CompaniesController: UITableViewController {
     fileprivate func setupTableView() {
         tableView.backgroundColor = .darkBlue
         tableView.tableFooterView = UIView() // Blank footer
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.cellReuseIdentifier)
+        tableView.register(CompanyCell.self, forCellReuseIdentifier: K.companyCellReuseIdentifier)
         tableView.separatorColor = .white
+        tableView.rowHeight = 60
     }
     
     // MARK: - Actions
@@ -61,8 +62,15 @@ class CompaniesController: UITableViewController {
     }
     
     @objc fileprivate func resetButtonTapped(_ sender: UIBarButtonItem) {
+
+        var indexPathsToRemove = [IndexPath]()
+        for row in 0..<companyManager.numberOfCompanies {
+            let indexPath = IndexPath(row: row, section: 0)
+            indexPathsToRemove.append(indexPath)
+        }
+        
         companyManager.deleteAllCompanies()
-        tableView.reloadData()
+        tableView.deleteRows(at: indexPathsToRemove, with: .left)
     }
 }
 
@@ -76,23 +84,19 @@ extension CompaniesController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellReuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.companyCellReuseIdentifier, for: indexPath) as! CompanyCell
         let company = companyManager.company(at: indexPath.row)
-        
+
         if let name = company.name, let founded = company.founded {
             let dateString = DateFormatter.localizedString(from: founded, dateStyle: .medium, timeStyle: .none)
-            cell.textLabel?.text = "\(name) - Founded: \(dateString)"
+            cell.companyLabel.text = "\(name) - Founded: \(dateString)"
         } else {
-            cell.textLabel?.text = company.name
+            cell.companyLabel.text = company.name
         }
         
         if let imageData = company.imageData {
-            cell.imageView?.image = UIImage(data: imageData)
+            cell.companyImageView.image = UIImage(data: imageData)
         }
-        
-        cell.backgroundColor = .cellColor
-        cell.textLabel?.textColor = .white
-        cell.textLabel?.font = .boldSystemFont(ofSize: 16)
         
         return cell
     }
@@ -110,6 +114,19 @@ extension CompaniesController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: 16)
+        label.text = "No companies available..."
+        return label
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return (companyManager.numberOfCompanies == 0) ? 150 : 0
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

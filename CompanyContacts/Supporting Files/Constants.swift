@@ -7,6 +7,6 @@
 //
 
 struct K {
-    static let cellReuseIdentifier = "UITableViewCell"
+    static let companyCellReuseIdentifier = "CompanyCell"
 }
 
