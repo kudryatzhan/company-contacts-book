@@ -66,6 +66,16 @@ class CompanyManager {
         CoreDataManager.shared.saveContext()
     }
     
+    func deleteAllCompanies() {
+        do {
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: Company.fetchRequest())
+            try CoreDataManager.shared.context.execute(batchDeleteRequest)
+            companies.removeAll()
+        } catch {
+            print("Failed to execute batchDeleteRequest: \(error)")
+        }
+    }
+    
     // Core Data
     
     private func fetchFromCoreData() {

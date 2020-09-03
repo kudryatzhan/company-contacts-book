@@ -33,6 +33,11 @@ class CompaniesController: UITableViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(addButtonTapped))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset",
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(resetButtonTapped))
     }
     
     fileprivate func setupTableView() {
@@ -54,6 +59,11 @@ class CompaniesController: UITableViewController {
         
         present(navController, animated: true, completion: nil)
     }
+    
+    @objc fileprivate func resetButtonTapped(_ sender: UIBarButtonItem) {
+        companyManager.deleteAllCompanies()
+        tableView.reloadData()
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -74,6 +84,10 @@ extension CompaniesController {
             cell.textLabel?.text = "\(name) - Founded: \(dateString)"
         } else {
             cell.textLabel?.text = company.name
+        }
+        
+        if let imageData = company.imageData {
+            cell.imageView?.image = UIImage(data: imageData)
         }
         
         cell.backgroundColor = .cellColor

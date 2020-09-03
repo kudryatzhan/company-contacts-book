@@ -62,6 +62,8 @@ class CreateCompanyController: UIViewController {
         imageView.isUserInteractionEnabled = true
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 50
+        imageView.layer.borderColor = UIColor.darkBlue.cgColor
+        imageView.layer.borderWidth = 1
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto))
         imageView.addGestureRecognizer(tapGestureRecognizer)
