@@ -11,12 +11,18 @@ import UIKit
 class EmployeesController: UITableViewController {
     
     var currentCompany: Company!
+    var employeeManager: EmployeeManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.backgroundColor = .darkBlue
+        setupTableView()
         setupNavigationBar()
+    }
+    
+    fileprivate func setupTableView() {
+        tableView.backgroundColor = .darkBlue
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
     }
     
     fileprivate func setupNavigationBar() {
@@ -26,6 +32,9 @@ class EmployeesController: UITableViewController {
     
     @objc fileprivate func addButtonTapped(_ sender: UIBarButtonItem) {
         let createEmployeeController = CreateEmployeeController()
+        createEmployeeController.employeeManager = employeeManager
+        createEmployeeController.delegate = self
+        
         let navController = UINavigationController(rootViewController: createEmployeeController)
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true, completion: nil)

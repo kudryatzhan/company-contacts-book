@@ -30,9 +30,11 @@ class CompanyManager {
     func createCompanyWith(name: String, date: Date, imageData: Data) -> Company {
         let context = CoreDataManager.shared.context
         let newCompany = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context) as! Company
+        
         newCompany.setValue(name, forKey: "name")
         newCompany.setValue(date, forKey: "founded")
         newCompany.setValue(imageData, forKey: "imageData")
+        
         companies.append(newCompany)
         CoreDataManager.shared.saveContext()
         

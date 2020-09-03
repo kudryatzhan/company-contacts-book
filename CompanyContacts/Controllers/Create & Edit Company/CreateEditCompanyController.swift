@@ -102,7 +102,7 @@ class CreateEditCompanyController: UIViewController {
         infoBackgroundView.addSubview(nameTextField)
         nameTextField.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 16).isActive = true
         nameTextField.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor).isActive = true
-        nameTextField.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
+        nameTextField.trailingAnchor.constraint(equalTo: infoBackgroundView.layoutMarginsGuide.trailingAnchor).isActive = true
         
         // Date picker
         infoBackgroundView.addSubview(datePicker)
