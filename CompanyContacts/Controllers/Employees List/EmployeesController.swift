@@ -21,10 +21,7 @@ class EmployeesController: UITableViewController {
     
     fileprivate func setupNavigationBar() {
         navigationItem.title = currentCompany.name
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"),
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(addButtonTapped))
+        setupRightBarButtonItemAdd(with: #selector(addButtonTapped))
     }
     
     @objc fileprivate func addButtonTapped(_ sender: UIBarButtonItem) {

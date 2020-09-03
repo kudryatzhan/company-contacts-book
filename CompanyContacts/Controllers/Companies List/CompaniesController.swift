@@ -29,11 +29,7 @@ class CompaniesController: UITableViewController {
     fileprivate func setupNavigationBar() {
         // Navigation item
         navigationItem.title = "Companies"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus"),
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(addButtonTapped))
-        
+        setupRightBarButtonItemAdd(with: #selector(addButtonTapped))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset",
                                                            style: .plain,
                                                            target: self,

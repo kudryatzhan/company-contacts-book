@@ -84,14 +84,7 @@ class CreateEditCompanyController: UIViewController {
     
     fileprivate func setupUI() {
         // Info background view
-        let infoBackgroundView = UIView()
-        infoBackgroundView.backgroundColor = .lightBlue
-        infoBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(infoBackgroundView)
-        
-        infoBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        infoBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        infoBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        let infoBackgroundView = setupLightBlueBackgroundView()
         
         // Image view
         infoBackgroundView.addSubview(companyImageView)
@@ -124,13 +117,8 @@ class CreateEditCompanyController: UIViewController {
         } else {
             navigationItem.title = "Create Company"
         }
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                                           target: self,
-                                                           action: #selector(cancelButtonTapped))
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
-                                                            target: self,
-                                                            action: #selector(saveButtonTapped))
+        setupLeftBarButtonItemCancel(with: #selector(cancelButtonTapped))
+        setupRightBarButtonItemSave(with: #selector(saveButtonTapped))
     }
     
     @objc fileprivate func cancelButtonTapped(_ sender: UIBarButtonItem) {

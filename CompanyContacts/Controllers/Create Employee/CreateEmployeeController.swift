@@ -10,22 +10,38 @@ import UIKit
 
 class CreateEmployeeController: UIViewController {
     
+    // MARK: - Properties
+    
+    // MARK: - View lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationBar()
+        setupUI()
         view.backgroundColor = .darkBlue
     }
+    
+    // MARK: - Helper methods
     
     fileprivate func setupNavigationBar() {
         navigationItem.title = "Create Employee"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                                           target: self,
-                                                           action: #selector(cancelButtonTapped))
+        setupLeftBarButtonItemCancel(with: #selector(cancelButtonTapped))
+        setupRightBarButtonItemSave(with: #selector(saveButtonTapped))
     }
     
+    fileprivate func setupUI() {
+        let infoBackgroundView = setupLightBlueBackgroundView()
+    }
+    
+    // MARK: - Actions
+    
     @objc fileprivate func cancelButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func saveButtonTapped() {
         dismiss(animated: true, completion: nil)
     }
 }
