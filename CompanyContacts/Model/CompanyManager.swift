@@ -12,11 +12,7 @@ class CompanyManager {
     
     // MARK: - Properties
     
-    private var companies = [Company]()
-    
-    var numberOfCompanies: Int {
-        return companies.count
-    }
+    private(set) var companies = [Company]()
     
     // MARK: - Initializers
     
@@ -26,23 +22,18 @@ class CompanyManager {
     
     // MARK: - CRUD
     
-    @discardableResult
     func createCompanyWith(name: String, date: Date, imageData: Data) -> Company {
         let context = CoreDataManager.shared.context
         let newCompany = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context) as! Company
         
-        newCompany.setValue(name, forKey: "name")
-        newCompany.setValue(date, forKey: "founded")
-        newCompany.setValue(imageData, forKey: "imageData")
+        newCompany.name = name
+        newCompany.founded = date
+        newCompany.imageData = imageData
         
         companies.append(newCompany)
         CoreDataManager.shared.saveContext()
         
         return newCompany
-    }
-    
-    func company(at index: Int) -> Company {
-        return companies[index]
     }
     
     func index(of company: Company) -> Int {
@@ -53,7 +44,7 @@ class CompanyManager {
     }
     
     func deleteCompany(at index: Int) {
-        let companyToRemove = company(at: index)
+        let companyToRemove = companies[index]
         companies.remove(at: index)
         
         CoreDataManager.shared.context.delete(companyToRemove)
@@ -81,11 +72,9 @@ class CompanyManager {
     // Core Data
     
     private func fetchCompaniesFromCD() {
-        let context = CoreDataManager.shared.context
-        let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
-        
         do {
-            companies = try context.fetch(fetchRequest)
+            let context = CoreDataManager.shared.context
+            companies = try context.fetch(Company.fetchRequest())
         } catch {
             print("Error fetching from Core Data: \(error)")
         }

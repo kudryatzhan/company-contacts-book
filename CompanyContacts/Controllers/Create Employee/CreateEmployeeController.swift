@@ -116,8 +116,12 @@ class CreateEmployeeController: UIViewController {
     }
     
     @objc fileprivate func saveButtonTapped() {
-        guard let employeeName = nameTextField.text, !employeeName.isEmpty,
-            let birthdayText = birthdayTextField.text else { return }
+        guard let employeeName = nameTextField.text, let birthdayText = birthdayTextField.text else { return }
+        
+        if employeeName.isEmpty {
+            showAlertWith(title: "Name field is empty", message: "Please enter employee's name")
+            return
+        }
         
         if birthdayText.isEmpty {
             showAlertWith(title: "Empty birthday text", message: "Please enter your birthday date")
@@ -134,11 +138,5 @@ class CreateEmployeeController: UIViewController {
         dismiss(animated: true) {
             self.delegate?.didAddEmployee(newEmployee)
         }
-    }
-    
-    fileprivate func showAlertWith(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
     }
 }

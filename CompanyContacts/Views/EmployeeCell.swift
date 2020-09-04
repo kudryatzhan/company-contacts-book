@@ -10,8 +10,14 @@ import UIKit
 
 class EmployeeCell: UITableViewCell {
     
+    // always .value1
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .value1, reuseIdentifier: reuseIdentifier) // always .value1
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+        
+        backgroundColor = .cellColor
+        textLabel?.textColor = .white
+        textLabel?.font = .boldSystemFont(ofSize: 16)
+        detailTextLabel?.textColor = .white
     }
     
     required init?(coder: NSCoder) {

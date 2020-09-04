@@ -13,13 +13,13 @@ import UIKit
 extension CompaniesController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return companyManager.numberOfCompanies
+        return companyManager.companies.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.companyCellReuseIdentifier, for: indexPath) as! CompanyCell
-        let company = companyManager.company(at: indexPath.row)
+        let company = companyManager.companies[indexPath.row]
 
         if let name = company.name, let founded = company.founded {
             let dateString = DateFormatter.localizedString(from: founded, dateStyle: .medium, timeStyle: .none)
@@ -60,7 +60,7 @@ extension CompaniesController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return (companyManager.numberOfCompanies == 0) ? 150 : 0
+        return (companyManager.companies.count == 0) ? 150 : 0
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -68,7 +68,7 @@ extension CompaniesController {
         // Edit action
         let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
             let editCompanyController = CreateEditCompanyController()
-            editCompanyController.companyToEdit = self.companyManager.company(at: indexPath.row)
+            editCompanyController.companyToEdit = self.companyManager.companies[indexPath.row]
             editCompanyController.delegate = self
             editCompanyController.companyManager = self.companyManager
             
@@ -94,7 +94,7 @@ extension CompaniesController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let employeesController = EmployeesController()
         // DI
-        let company = companyManager.company(at: indexPath.row)
+        let company = companyManager.companies[indexPath.row]
         employeesController.employeeManager = EmployeeManager(company: company)
         employeesController.currentCompany = company
         navigationController?.pushViewController(employeesController, animated: true)

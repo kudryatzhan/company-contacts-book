@@ -8,5 +8,6 @@
 
 struct K {
     static let companyCellReuseIdentifier = "CompanyCell"
+    static let employeeCellReuseIdentifier = "EmployeeCell"
 }
 

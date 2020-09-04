@@ -13,24 +13,20 @@ import UIKit
 extension EmployeesController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return employeeManager.numberOfEmployees
+        return employeeManager.employees.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EmployeeCell", for: indexPath)
-        let employee = employeeManager.employee(at: indexPath.row)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.employeeCellReuseIdentifier, for: indexPath)
+        let employee = employeeManager.employees[indexPath.row]
         
         cell.textLabel?.text = employee.name
-        cell.backgroundColor = .cellColor
-        cell.textLabel?.textColor = .white
-        cell.textLabel?.font = .boldSystemFont(ofSize: 16)
         
         if let birthday = employee.birthday {
             let birthdayText = DateFormatter.localizedString(from: birthday,
                                                              dateStyle: .medium,
                                                              timeStyle: .none)
             cell.detailTextLabel?.text = birthdayText
-            cell.detailTextLabel?.textColor = .white
         }
         
         return cell

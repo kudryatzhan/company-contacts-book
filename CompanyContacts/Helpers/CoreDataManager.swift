@@ -15,7 +15,7 @@ class CoreDataManager {
     // MARK: - Core Data stack
     
     private lazy var persistentContainer: NSPersistentContainer = {
-
+        
         let container = NSPersistentContainer(name: "CompanyContactsModels")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -25,10 +25,13 @@ class CoreDataManager {
         return container
     }()
     
-    // MARK: - Core Data Saving support
+    // MARK: - Core Data support
+    
+    var context: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
     
     func saveContext () {
-        let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
@@ -38,9 +41,4 @@ class CoreDataManager {
             }
         }
     }
-    
-    var context: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
-    
 }

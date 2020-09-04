@@ -12,27 +12,18 @@ class EmployeeManager {
     
     // MARK: - Properties
     
-    private var employees = [Employee]()
+    private(set) var employees = [Employee]()
     
     private var company: Company?
-    
-    var numberOfEmployees: Int {
-        return employees.count
-    }
     
     // MARK: - Initializers
     
     init(company: Company) {
-        // FIXME: Fetch employees from specified company ONLY
         self.company = company
         fetchEmployees()
     }
     
     // MARK: - CRUD
-    
-    func employee(at index: Int) -> Employee {
-        return employees[index]
-    }
     
     func index(of employee: Employee) -> Int {
         guard let index = employees.firstIndex(of: employee) else {
@@ -55,8 +46,6 @@ class EmployeeManager {
         
         return newEmployee
     }
-    
-    // Core Data
     
     private func fetchEmployees() {
         guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }

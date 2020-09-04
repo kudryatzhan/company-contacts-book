@@ -59,7 +59,7 @@ class CompaniesController: UITableViewController {
     
     @objc fileprivate func resetButtonTapped(_ sender: UIBarButtonItem) {
         var indexPathsToRemove = [IndexPath]()
-        for row in 0..<companyManager.numberOfCompanies {
+        for row in 0..<companyManager.companies.count {
             let indexPath = IndexPath(row: row, section: 0)
             indexPathsToRemove.append(indexPath)
         }

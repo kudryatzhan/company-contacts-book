@@ -127,13 +127,18 @@ class CreateEditCompanyController: UIViewController {
     
     @objc fileprivate func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard
-            let companyName = nameTextField.text, !companyName.isEmpty,
-            let imageData = companyImageView.image?.pngData() else { return }
+            let companyName = nameTextField.text, let imageData = companyImageView.image?.pngData() else { return }
+        
+        if companyName.isEmpty {
+            showAlertWith(title: "Company field is empty", message: "Please enter company name")
+            return
+        }
         
         if companyToEdit != nil {
+            // Safe to unwrap
             companyManager.updateCompany(companyToEdit!, withName: companyName, date: datePicker.date, imageData: imageData)
             dismiss(animated: true) {
-                self.delegate?.didEditCompany(self.companyToEdit!) // Safe to unwrap
+                self.delegate?.didEditCompany(self.companyToEdit!)
             }
         } else {
             let newCompany = companyManager.createCompanyWith(name: companyName, date: datePicker.date, imageData: imageData)
