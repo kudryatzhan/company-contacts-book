@@ -62,6 +62,17 @@ class CreateEmployeeController: UIViewController {
         return textField
     }()
     
+    let segmentedControl: UISegmentedControl = {
+        let segControl = UISegmentedControl(items: ["Executive", "Senior Management", "Staff"])
+        segControl.translatesAutoresizingMaskIntoConstraints = false
+        segControl.selectedSegmentIndex = 0
+        segControl.selectedSegmentTintColor = .darkBlue
+        segControl.setTitleTextAttributes([.foregroundColor: UIColor.darkBlue], for: .normal)
+        segControl.setTitleTextAttributes([.foregroundColor: UIColor.lightBlue], for: .selected)
+
+        return segControl
+    }()
+    
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
@@ -100,13 +111,20 @@ class CreateEmployeeController: UIViewController {
         birthdayTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 8).isActive = true
         birthdayTextField.trailingAnchor.constraint(equalTo: infoBackgroundView.layoutMarginsGuide.trailingAnchor).isActive = true
         birthdayTextField.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor).isActive = true
-        birthdayTextField.bottomAnchor.constraint(equalTo: infoBackgroundView.bottomAnchor, constant: -16).isActive = true
+//        birthdayTextField.bottomAnchor.constraint(equalTo: infoBackgroundView.bottomAnchor, constant: -16).isActive = true
         
         // Birthday label
         infoBackgroundView.addSubview(birthdayLabel)
         birthdayLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
         birthdayLabel.centerYAnchor.constraint(equalTo: birthdayTextField.centerYAnchor).isActive = true
         birthdayLabel.trailingAnchor.constraint(equalTo: birthdayTextField.leadingAnchor, constant: -16).isActive = true
+        
+        // Segmented control
+        infoBackgroundView.addSubview(segmentedControl)
+        segmentedControl.topAnchor.constraint(equalTo: birthdayTextField.bottomAnchor, constant: 8).isActive = true
+        segmentedControl.bottomAnchor.constraint(equalTo: infoBackgroundView.bottomAnchor, constant: -16).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
+        segmentedControl.trailingAnchor.constraint(equalTo: birthdayTextField.trailingAnchor).isActive = true
     }
     
     // MARK: - Actions
