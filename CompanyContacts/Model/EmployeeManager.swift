@@ -10,15 +10,18 @@ import CoreData
 
 class EmployeeManager {
     
+    // MARK: - Nested types
+    
+    enum EmployeeType: String {
+        case executive        = "Executive"
+        case seniorManagement = "Senior Management"
+        case staff            = "Staff"
+    }
+    
     // MARK: - Properties
-    
-//    private(set) var employees = [Employee]()
-//    private(set) var shortNameEmployees = [Employee]()
-//    private(set) var longNameEmployees = [Employee]()
-//    private(set) var veryLongNameEmployees = [Employee]()
-    
+        
     private(set) var allEmployees = [[Employee]]()
-    let sectionTitles = ["Short Names", "Long Names", "Very Long Names"]
+    let sectionTitles = ["Executive", "Senior Management", "Staff"]
     
     private var company: Company?
     
@@ -40,28 +43,28 @@ class EmployeeManager {
         }
         
         fatalError("Could't locate employee to match")
-//        guard let index = employees.firstIndex(of: employee) else {
-//            fatalError("Unexpected Employee.")
-//        }
     }
     
-    func createEmployeeWith(name: String, birthday: Date) -> Employee {
+    func createEmployeeWith(name: String, birthday: Date, type: EmployeeType) -> Employee {
         let context = CoreDataManager.shared.context
         let newEmployee = NSEntityDescription.insertNewObject(forEntityName: "Employee", into: context) as! Employee
         
         newEmployee.name = name
         newEmployee.birthday = birthday
         newEmployee.company = company // Set relationships
+        newEmployee.type = type.rawValue
         
-        if name.count < 6 {
+        switch type {
+        case .executive:
             allEmployees[0].append(newEmployee)
-        } else if name.count < 9 {
+            
+        case .seniorManagement:
             allEmployees[1].append(newEmployee)
-        } else {
+
+        case .staff:
             allEmployees[2].append(newEmployee)
         }
-//        employees.append(newEmployee)
-        
+
         CoreDataManager.shared.saveContext()
         
         return newEmployee
@@ -69,30 +72,15 @@ class EmployeeManager {
     
     private func fetchEmployees() {
         guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }
-    
-//        self.employees = companyEmployees
-        let shortNameEmployees = companyEmployees.filter({ (employee) -> Bool in
-            guard let count = employee.name?.count else { return false }
-            
-            return count < 6
-        })
-        
-        let longNameEmployees = companyEmployees.filter({ (employee) -> Bool in
-            guard let count = employee.name?.count else { return false }
-            
-            return count >= 6 && count < 9
-        })
-        
-        let veryLongNameEmployees = companyEmployees.filter({ (employee) -> Bool in
-            guard let count = employee.name?.count else { return false }
-            
-            return count >= 9
-        })
+
+        let executiveEmployees = companyEmployees.filter { $0.type == EmployeeType.executive.rawValue }
+        let seniorManagementEmployees = companyEmployees.filter { $0.type == EmployeeType.seniorManagement.rawValue }
+        let staffEmployees = companyEmployees.filter { $0.type == EmployeeType.staff.rawValue }
         
         allEmployees = [
-            shortNameEmployees,
-            longNameEmployees,
-            veryLongNameEmployees
+            executiveEmployees,
+            seniorManagementEmployees,
+            staffEmployees
         ]
     }
 }

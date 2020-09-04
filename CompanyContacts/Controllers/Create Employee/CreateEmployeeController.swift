@@ -62,8 +62,8 @@ class CreateEmployeeController: UIViewController {
         return textField
     }()
     
-    let segmentedControl: UISegmentedControl = {
-        let segControl = UISegmentedControl(items: ["Executive", "Senior Management", "Staff"])
+    lazy var segmentedControl: UISegmentedControl = {
+        let segControl = UISegmentedControl(items: employeeManager.sectionTitles)
         segControl.translatesAutoresizingMaskIntoConstraints = false
         segControl.selectedSegmentIndex = 0
         segControl.selectedSegmentTintColor = .darkBlue
@@ -111,7 +111,6 @@ class CreateEmployeeController: UIViewController {
         birthdayTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 8).isActive = true
         birthdayTextField.trailingAnchor.constraint(equalTo: infoBackgroundView.layoutMarginsGuide.trailingAnchor).isActive = true
         birthdayTextField.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor).isActive = true
-//        birthdayTextField.bottomAnchor.constraint(equalTo: infoBackgroundView.bottomAnchor, constant: -16).isActive = true
         
         // Birthday label
         infoBackgroundView.addSubview(birthdayLabel)
@@ -151,7 +150,10 @@ class CreateEmployeeController: UIViewController {
             return
         }
         
-        let newEmployee = employeeManager.createEmployeeWith(name: employeeName, birthday: birthdayDate)
+        let segmentedTitle = employeeManager.sectionTitles[segmentedControl.selectedSegmentIndex]
+        let employeeType = EmployeeManager.EmployeeType(rawValue: segmentedTitle) ?? .executive
+        
+        let newEmployee = employeeManager.createEmployeeWith(name: employeeName, birthday: birthdayDate, type: employeeType)
         
         dismiss(animated: true) {
             self.delegate?.didAddEmployee(newEmployee)
