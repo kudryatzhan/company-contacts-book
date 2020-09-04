@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B205023125020DBF0017F71D /* IndentedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B205023025020DBF0017F71D /* IndentedLabel.swift */; };
 		B224FF2324FF2C0900465ECF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF2224FF2C0900465ECF /* AppDelegate.swift */; };
 		B224FF2524FF2C0900465ECF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF2424FF2C0900465ECF /* SceneDelegate.swift */; };
 		B224FF2724FF2C0900465ECF /* CompaniesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B224FF2624FF2C0900465ECF /* CompaniesController.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B205023025020DBF0017F71D /* IndentedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentedLabel.swift; sourceTree = "<group>"; };
 		B224FF1F24FF2C0900465ECF /* CompanyContacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompanyContacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B224FF2224FF2C0900465ECF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B224FF2424FF2C0900465ECF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				B23E0EC62500A3C900454CF4 /* CompanyCell.swift */,
 				B2CE3F6125011471004FC5E4 /* EmployeeCell.swift */,
+				B205023025020DBF0017F71D /* IndentedLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				B224FF2724FF2C0900465ECF /* CompaniesController.swift in Sources */,
 				B23E0EC92500B20F00454CF4 /* CompaniesController+UITableView.swift in Sources */,
 				B224FF3724FF349E00465ECF /* UIColor+theme.swift in Sources */,
+				B205023125020DBF0017F71D /* IndentedLabel.swift in Sources */,
 				B2CE3F532500BF64004FC5E4 /* EmployeesController.swift in Sources */,
 				B2CE3F5A2500C834004FC5E4 /* UIViewController+customViews.swift in Sources */,
 				B224FF2324FF2C0900465ECF /* AppDelegate.swift in Sources */,

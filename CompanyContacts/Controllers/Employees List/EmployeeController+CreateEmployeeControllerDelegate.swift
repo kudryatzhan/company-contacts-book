@@ -13,9 +13,9 @@ import Foundation
 extension EmployeesController: CreateEmployeeControllerDelegate {
     
     func didAddEmployee(_ employee: Employee) {
-        let index = employeeManager.index(of: employee)
-        let newIndexPath = IndexPath(row: index, section: 0)
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
-        tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
+        let employeeIndexPath = employeeManager.indexPath(of: employee)
+        
+        tableView.insertRows(at: [employeeIndexPath], with: .automatic)
+        tableView.scrollToRow(at: employeeIndexPath, at: .bottom, animated: true)
     }
 }

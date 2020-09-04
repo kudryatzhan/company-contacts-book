@@ -22,6 +22,7 @@ class EmployeesController: UITableViewController {
     
     fileprivate func setupTableView() {
         tableView.backgroundColor = .darkBlue
+        tableView.estimatedSectionHeaderHeight = 50
         tableView.register(EmployeeCell.self, forCellReuseIdentifier: "EmployeeCell")
     }
     
