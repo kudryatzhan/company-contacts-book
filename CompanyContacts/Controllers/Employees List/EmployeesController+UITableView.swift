@@ -27,7 +27,7 @@ extension EmployeesController {
         
         let employee = employeeManager.allEmployees[indexPath.section][indexPath.row]
     
-        cell.textLabel?.text = employee.name
+        cell.textLabel?.text = employee.fullName
         
         if let birthday = employee.birthday {
             let birthdayText = DateFormatter.localizedString(from: birthday,

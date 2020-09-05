@@ -53,7 +53,7 @@ class EmployeeManager {
         let context = CoreDataManager.shared.context
         let newEmployee = NSEntityDescription.insertNewObject(forEntityName: "Employee", into: context) as! Employee
         
-        newEmployee.name = name
+        newEmployee.fullName = name
         newEmployee.birthday = birthday
         newEmployee.company = company // Set relationships
         newEmployee.type = type.rawValue

@@ -117,7 +117,7 @@ class CompanyManager {
         
         companyData.employees?.forEach({ (employeeData) in
             let employee = Employee(context: context)
-            employee.name = employeeData.name
+            employee.fullName = employeeData.name
             employee.birthday = dateFormatter.date(from: employeeData.birthday)
             employee.type = employeeData.type
             employee.company = newCompany
