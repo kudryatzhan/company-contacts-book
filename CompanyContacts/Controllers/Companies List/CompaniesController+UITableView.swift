@@ -30,6 +30,8 @@ extension CompaniesController {
         
         if let imageData = company.imageData {
             cell.companyImageView.image = UIImage(data: imageData)
+        } else {
+            cell.companyImageView.image = #imageLiteral(resourceName: "select_photo_empty")
         }
         
         return cell

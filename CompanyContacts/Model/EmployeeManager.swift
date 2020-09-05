@@ -21,7 +21,11 @@ class EmployeeManager {
     // MARK: - Properties
         
     private(set) var allEmployees = [[Employee]]()
-    let sectionTitles = ["Executive", "Senior Management", "Staff"]
+    
+    let sectionTitles = [EmployeeType.executive.rawValue,
+                         EmployeeType.seniorManagement.rawValue,
+                         EmployeeType.staff.rawValue
+    ]
     
     private var company: Company?
     
@@ -72,15 +76,11 @@ class EmployeeManager {
     
     private func fetchEmployees() {
         guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }
-
-        let executiveEmployees = companyEmployees.filter { $0.type == EmployeeType.executive.rawValue }
-        let seniorManagementEmployees = companyEmployees.filter { $0.type == EmployeeType.seniorManagement.rawValue }
-        let staffEmployees = companyEmployees.filter { $0.type == EmployeeType.staff.rawValue }
         
-        allEmployees = [
-            executiveEmployees,
-            seniorManagementEmployees,
-            staffEmployees
-        ]
+        sectionTitles.forEach { (employeeType) in
+            allEmployees.append(
+                companyEmployees.filter { $0.type == employeeType }
+            )
+        }
     }
 }

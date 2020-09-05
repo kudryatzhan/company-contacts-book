@@ -20,14 +20,6 @@ class CreateEmployeeController: UIViewController {
     
     weak var delegate: CreateEmployeeControllerDelegate?
     
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "MM/dd/yyyy"
-        
-        return formatter
-    }()
-    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"

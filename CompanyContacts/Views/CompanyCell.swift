@@ -13,12 +13,13 @@ class CompanyCell: UITableViewCell {
     // MARK: - Properties
     
     let companyImageView: UIImageView = {
-        let imageView = UIImageView()
+        let imageView = UIImageView(image: nil)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.borderColor = UIColor.darkBlue.cgColor
         imageView.layer.borderWidth = 1
         imageView.layer.cornerRadius = 25
         imageView.clipsToBounds = true
+        imageView.backgroundColor = .white
         return imageView
     }()
     

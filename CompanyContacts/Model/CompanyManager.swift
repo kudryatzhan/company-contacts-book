@@ -79,4 +79,52 @@ class CompanyManager {
             print("Error fetching from Core Data: \(error)")
         }
     }
+    
+    // Web service
+    
+    func fetchCompaniesFromServer(completion: @escaping (_ success: Bool) -> Void) {
+        ServiceManager.shared.downloadCompaniesFromServer { (companyDataArray) in
+            guard let companyDataArray = companyDataArray else {
+                DispatchQueue.main.async {
+                    completion(false)
+                }
+                return
+            }
+            
+            let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            privateContext.parent = CoreDataManager.shared.context
+            
+            companyDataArray.forEach { (companyData) in
+                self.createCompanyWith(companyData: companyData, context: privateContext)
+            }
+            
+            self.fetchCompaniesFromCD()
+            
+            DispatchQueue.main.async {
+                completion(true)
+            }
+        }
+    }
+    
+    fileprivate func createCompanyWith(companyData: CompanyData, context: NSManagedObjectContext) {
+        let newCompany = Company(context: context)
+        newCompany.name = companyData.name
+        newCompany.founded = dateFormatter.date(from: companyData.founded)
+        
+        companyData.employees?.forEach({ (employeeData) in
+            let employee = Employee(context: context)
+            employee.name = employeeData.name
+            employee.birthday = dateFormatter.date(from: employeeData.birthday)
+            employee.company = newCompany
+            employee.type = employeeData.type
+        })
+        
+        do {
+            try context.save()
+            try context.parent?.save()
+        } catch {
+            print("Could not save to Core Data: \(error)")
+        }
+    }
+    
 }
