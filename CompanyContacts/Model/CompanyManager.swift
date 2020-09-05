@@ -94,6 +94,10 @@ class CompanyManager {
             let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
             privateContext.parent = CoreDataManager.shared.context
             
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: Company.fetchRequest())
+            _ = try? privateContext.execute(batchDeleteRequest)
+            
+            
             companyDataArray.forEach { (companyData) in
                 self.createCompanyWith(companyData: companyData, context: privateContext)
             }
@@ -115,8 +119,8 @@ class CompanyManager {
             let employee = Employee(context: context)
             employee.name = employeeData.name
             employee.birthday = dateFormatter.date(from: employeeData.birthday)
-            employee.company = newCompany
             employee.type = employeeData.type
+            employee.company = newCompany
         })
         
         do {

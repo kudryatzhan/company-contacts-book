@@ -34,6 +34,7 @@ class CompaniesController: UITableViewController {
                                                            style: .plain,
                                                            target: self,
                                                            action: #selector(resetButtonTapped))
+        extendedLayoutIncludesOpaqueBars = true
     }
     
     fileprivate func setupTableView() {
@@ -42,6 +43,13 @@ class CompaniesController: UITableViewController {
         tableView.register(CompanyCell.self, forCellReuseIdentifier: K.companyCellReuseIdentifier)
         tableView.separatorColor = .white
         tableView.rowHeight = 60
+        tableView.sectionHeaderHeight = 50
+        
+        // Refresh control
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+        refreshControl.tintColor = .white
+        tableView.refreshControl = refreshControl
     }
     
     // MARK: - Actions
@@ -66,5 +74,14 @@ class CompaniesController: UITableViewController {
         
         companyManager.deleteAllCompanies()
         tableView.deleteRows(at: indexPathsToRemove, with: .left)
+    }
+    
+    @objc fileprivate func handleRefreshControl(_ sender: UIRefreshControl) {
+        companyManager.fetchCompaniesFromServer { (success) in
+            if success {
+                self.tableView.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
+            }
+        }
     }
 }
